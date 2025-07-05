@@ -36,38 +36,21 @@ let agent;
  * @returns {Promise<any>} The initialized agent (onchain or mock).
  */
 async function createAgent() {
-  // If agent has already been initialized, return it
-  if (agent) {
-    return agent;
-  }
-
-  // Try to create an onchain agent first if the module is available
-  if (createOnchainAgent) {
-    try {
-      console.log('Attempting to create onchain agent...');
-      agent = await createOnchainAgent();
-      console.log('Onchain agent created successfully');
-      return agent;
-    } catch (error) {
-      console.error('Error creating onchain agent:', error);
-      console.log('Falling back to mock agent...');
+    // If agent has already been initialized, return it
+    if (agent) {
+        return agent;
     }
-  } else {
-    console.log('Onchain agent module not available, using mock agent');
-  }
 
-  // Fall back to mock agent
-  try {
-    agent = new MockAgent();
-    console.log('Mock agent created successfully');
-    return agent;
-  } catch (error) {
-    console.error('Error initializing mock agent:', error);
-    throw new Error('Failed to initialize agent');
-  }
+    // Always create a mock agent
+    try {
+        agent = new MockAgent();
+        console.log('Mock agent created successfully');
+        return agent;
+    } catch (error) {
+        console.error('Error initializing mock agent:', error);
+        throw new Error('Failed to initialize agent');
+    }
 }
-
-
 
 /**
  * A simplified mock agent that doesn't rely on external libraries
