@@ -34,6 +34,9 @@ const chatbotRoutes = require("./src/routes/chatbot.routes");
 
 const app = express();
 
+app.set('trust proxy', true);
+
+
 // Security middleware
 app.use(
   helmet({
