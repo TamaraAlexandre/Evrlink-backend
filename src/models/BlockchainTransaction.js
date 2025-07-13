@@ -42,9 +42,6 @@ const BlockchainTransaction = sequelize.define(
   }
 );
 
-// BlockchainTransaction.belongsTo(GiftCardSettlement, {
-//   foreignKey: "gift_card_settlement_id",
-// });
 BlockchainTransaction.belongsTo(BlockchainTransactionCategory, {
   foreignKey: "blockchain_tx_id",
 });
